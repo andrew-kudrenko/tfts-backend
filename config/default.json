@@ -1,0 +1,6 @@
+{
+  "db-config": {
+    "password": "e5573g39ra",
+    "db-url": "mongodb+srv://admin:password@cluster0-mjv3l.mongodb.net"  
+  }
+}
