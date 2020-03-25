@@ -3,7 +3,6 @@ const bodyParser = require('body-parser')
 
 const port = process.env.PORT || 7000
 
-const commonRouter = require('./routes/common-router')
 const apiRouter = require('./routes/api-router')
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -14,7 +13,6 @@ app.use((_, res, next) => {
   next()
 })
 
-app.use('/', commonRouter)
 app.use('/api', apiRouter)
 
 app.listen(port, () => console.log(`Server has been started on port ${port}`))
