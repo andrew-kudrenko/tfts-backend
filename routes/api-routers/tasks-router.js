@@ -34,6 +34,18 @@ router.route('/tasks')
       next()
     })
   })
+  .delete((req, _, next) => {
+    Task.findByIdAndDelete(req.body._id, (err) => {
+      if (err) console.log(err)
+      next()
+    })
+  })
+  .patch((req, _, next) => {
+    Task.findByIdAndUpdate(req.body._id, {...req.body}, (err) => {
+      if (err) console.log(err)
+      next()
+    })
+  }) 
   .all((_, __, next) => {
     disconnect()
     next()
