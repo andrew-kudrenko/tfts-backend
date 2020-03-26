@@ -5,7 +5,7 @@ const { ObjectId } = require('mongoose').Types
 const { connect, disconnect } = require('../../utils/mongo')
 const Task = require('../../models/Task')
 
-router.all((_, __, next) => {
+router.use((_, __, next) => {
   connect('/tasks')
   next()
 })
@@ -54,7 +54,7 @@ router.post('/tasks/remove', (req, res, next) => {
   })
 })
 
-router.all((_, __, next) => {
+router.use((_, __, next) => {
   disconnect()
   next()
 })

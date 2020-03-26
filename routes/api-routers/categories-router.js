@@ -6,7 +6,7 @@ const { connect, disconnect } = require('../../utils/mongo')
 
 const Category = require('../../models/Category')
 
-router.all((_, __, next) => {
+router.use((_, __, next) => {
   connect('/categories')
   next()
 })
@@ -55,7 +55,7 @@ router.post('/categories/update', (req, res, next) => {
   })
 })
 
-router.all((_, __, next) => {
+router.use((_, __, next) => {
   disconnect()
   next()
 })
