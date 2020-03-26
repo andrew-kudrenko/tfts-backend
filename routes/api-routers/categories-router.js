@@ -17,6 +17,7 @@ router.route('/categories')
       if (err) res.status(501).end()
 
       res.send(data).end()
+      disconnect()
       next()
     })
   })
@@ -33,6 +34,7 @@ router.route('/categories')
       if (err) res.status(501).end()
 
       res.end()
+      disconnect()
       next()
     })
   })
@@ -50,7 +52,7 @@ router.post('/categories/remove', (req, res, next) => {
 router.post('/categories/update', (req, res, next) => {
   Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
     if (err) res.status(501).end()
-    
+
     res.end()
     disconnect()
     next()
