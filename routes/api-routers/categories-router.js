@@ -16,8 +16,8 @@ router.route('/categories')
     Category.find({}, (err, data) => {
       if (err) res.status(501).end()
 
-      res.send(data).end()
       disconnect()
+      res.send(data).end()
       next()
     })
   })
@@ -33,8 +33,8 @@ router.route('/categories')
     category.save(err => {
       if (err) res.status(501).end()
 
-      res.end()
       disconnect()
+      res.end()
       next()
     })
   })
@@ -43,8 +43,8 @@ router.post('/categories/remove', (req, res, next) => {
   Category.findByIdAndDelete(req.body._id, (err) => {
     if (err) res.status(501).end()
 
-    res.end()
     disconnect()
+    res.end()
     next()
   })
 })
@@ -53,8 +53,8 @@ router.post('/categories/update', (req, res, next) => {
   Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
     if (err) res.status(501).end()
 
-    res.end()
     disconnect()
+    res.end()
     next()
   })
 })

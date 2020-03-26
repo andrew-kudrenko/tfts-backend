@@ -15,6 +15,7 @@ router.route('/tasks')
     Task.find({}, (err, data) => {
       if (err) res.status(501).end()
 
+      disconnect()
       res.send(data).end()
       next()
     })
@@ -31,6 +32,7 @@ router.route('/tasks')
     task.save(err => {
       if (err) res.status(501).end()
 
+      disconnect()
       res.end()
       next()
     })
@@ -40,8 +42,8 @@ router.post('/tasks/update', (req, res, next) => {
   Task.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
     if (err) res.status(501).end()
 
-    res.end()
     disconnect()
+    res.end()
     next()
   })
 })
@@ -50,8 +52,8 @@ router.post('/tasks/remove', (req, res, next) => {
   Task.findByIdAndDelete(req.body._id, (err) => {
     if (err) res.status(501).end()
 
-    res.end()
     disconnect()
+    res.end()
     next()
   })
 })
