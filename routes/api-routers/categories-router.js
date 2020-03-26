@@ -39,6 +39,8 @@ router.route('/categories')
 router.post('/categories/remove', (req, res, next) => {
   Category.findByIdAndDelete(req.body._id, (err) => {
     if (err) res.status(501).end()
+
+    res.end()
     next()
   })
 })
@@ -46,6 +48,8 @@ router.post('/categories/remove', (req, res, next) => {
 router.post('/categories/update', (req, res, next) => {
   Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
     if (err) res.status(501).end()
+    
+    res.end()
     next()
   })
 })
