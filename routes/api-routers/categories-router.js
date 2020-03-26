@@ -6,17 +6,15 @@ const { connect, disconnect } = require('../../utils/mongo')
 
 const Category = require('../../models/Category')
 
-router.use((_, __, next) => {
-  connect('/categories')
-  next()
-})
-
 router.route('/categories')
+  .all((_, __, next) => {
+    connect('/categories')
+    next()
+  })
   .get((_, res, next) => {
     Category.find({}, (err, data) => {
       if (err) res.status(501).end()
 
-      disconnect()
       res.send(data).end()
       next()
     })
@@ -33,35 +31,51 @@ router.route('/categories')
     category.save(err => {
       if (err) res.status(501).end()
 
-      disconnect()
       res.end()
       next()
     })
   })
-
-router.post('/categories/remove', (req, res, next) => {
-  Category.findByIdAndDelete(req.body._id, (err) => {
-    if (err) res.status(501).end()
-
+  .all((_, __, next) => {
     disconnect()
-    res.end()
     next()
   })
-})
 
-router.post('/categories/update', (req, res, next) => {
-  Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
-    if (err) res.status(501).end()
-
-    disconnect()
-    res.end()
+router.route('/categories/remove')
+  .all((_, __, next) => {
+    connect('/categories')
     next()
   })
-})
+  .post((req, res, next) => {
+    Category.findByIdAndDelete(req.body._id, (err) => {
+      if (err) res.status(501).end()
 
-router.use((_, __, next) => {
-  disconnect()
-  next()
-})
+      res.end()
+      next()
+    })
+  })
+  .all((_, __, next) => {
+    disconnect()
+    next()
+  })
+
+router.route('/categories/update')
+  .all((_, __, next) => {
+    connect('/categories')
+    next()
+  })
+  .post((req, res, next) => {
+    Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
+      if (err) res.status(501).end()
+
+      res.end()
+      next()
+    })
+  })
+  .all((_, __, next) => {
+    disconnect()
+    next()
+  })
+
+
 
 module.exports = router
