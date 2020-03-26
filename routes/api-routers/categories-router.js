@@ -59,4 +59,9 @@ router.post('/categories/update', (req, res, next) => {
   })
 })
 
+router.use((_, __, next) => {
+  disconnect()
+  next()
+})
+
 module.exports = router
