@@ -5,11 +5,12 @@ const { ObjectId } = require('mongoose').Types
 const { connect, disconnect } = require('../../utils/mongo')
 const Task = require('../../models/Task')
 
+router.all((_, __, next) => {
+  connect('/tasks')
+  next()
+})
+
 router.route('/tasks')
-  .all((_, __, next) => {
-    connect('/tasks')
-    next()
-  })
   .get((_, res, next) => {
     Task.find({}, (err, data) => {
       if (err) res.status(501).end()

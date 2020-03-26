@@ -6,11 +6,12 @@ const { connect, disconnect } = require('../../utils/mongo')
 
 const Category = require('../../models/Category')
 
+router.all((_, __, next) => {
+  connect('/categories')
+  next()
+})
+
 router.route('/categories')
-  .all((_, __, next) => {
-    connect('/categories')
-    next()
-  })
   .get((_, res, next) => {
     Category.find({}, (err, data) => {
       if (err) res.status(501).end()
