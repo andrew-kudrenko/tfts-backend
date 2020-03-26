@@ -38,14 +38,14 @@ router.route('/categories')
 
 router.post('/categories/remove', (req, _, next) => {
   Category.findByIdAndDelete(req.body._id, (err) => {
-    if (err) console.log(err)
+    if (err) res.status(501).end()
     next()
   })
 })
 
 router.post('/categories/update', (req, _, next) => {
   Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
-    if (err) console.log(err)
+    if (err) res.status(501).end()
     next()
   })
 })

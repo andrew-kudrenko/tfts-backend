@@ -34,17 +34,17 @@ router.route('/tasks')
       next()
     })
   })
-
-router.post('/tasks/update', (req, _, next) => {
+  
+router.post('/tasks/update', (req, res, next) => {
   Task.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
-    if (err) console.log(err)
+    if (err) res.status(501).end()
     next()
   })
 })
 
-router.post('/tasks/remove', (req, _, next) => {
+router.post('/tasks/remove', (req, res, next) => {
   Task.findByIdAndDelete(req.body._id, (err) => {
-    if (err) console.log(err)
+    if (err) res.status(501).end()
     next()
   })
 })
