@@ -40,7 +40,7 @@ router.post('/tasks/update', (req, res, next) => {
   Task.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
     if (err) res.status(501).end()
 
-    res.end()
+    disconnect()
     next()
   })
 })
@@ -49,14 +49,9 @@ router.post('/tasks/remove', (req, res, next) => {
   Task.findByIdAndDelete(req.body._id, (err) => {
     if (err) res.status(501).end()
 
-    res.end()
+    disconnect()
     next()
   })
-})
-
-router.use((_, __, next) => {
-  disconnect()
-  next()
 })
 
 module.exports = router
