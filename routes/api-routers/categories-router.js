@@ -35,21 +35,24 @@ router.route('/categories')
       next()
     })
   })
-  .delete((req, _, next) => {
-    Category.findByIdAndDelete(req.body._id, (err) => {
-      if (err) console.log(err)
-      next()
-    })
-  })
-  .patch((req, _, next) => {
-    Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
-      if (err) console.log(err)
-      next()
-    })
-  })
-  .all((_, __, next) => {
-    disconnect()
+
+router.post('/categories/remove', (req, _, next) => {
+  Category.findByIdAndDelete(req.body._id, (err) => {
+    if (err) console.log(err)
     next()
   })
+})
+
+router.post('/categories/update', (req, _, next) => {
+  Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
+    if (err) console.log(err)
+    next()
+  })
+})
+
+router.all((_, __, next) => {
+  disconnect()
+  next()
+})
 
 module.exports = router
