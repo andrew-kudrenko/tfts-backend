@@ -4,7 +4,8 @@ const config = require('config')
 const password = config.get('db-config.password')
 const connectOptions = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 }
 
 const connect = endPoint => {

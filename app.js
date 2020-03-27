@@ -1,4 +1,5 @@
-const app = require('express')()
+const express = require('express')
+const app = express()
 const bodyParser = require('body-parser')
 
 const port = process.env.PORT || 7000
@@ -11,8 +12,9 @@ app.use(bodyParser.json())
 app.use((_, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
-  res.setHeader('Access-Control-Allow-Credentials', false)
+  res.setHeader('Access-Control-Allow-Credentials', true)
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
+  res.end()
   next()
 })
 

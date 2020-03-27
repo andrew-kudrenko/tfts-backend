@@ -45,7 +45,6 @@ router.route('/tasks/update')
     next()
   })
   .post((req, res, next) => {
-    console.log(req.body)
     const body = req.body
     Task.findByIdAndUpdate(body._id, { ...body }, (err) => {
       if (err) res.status(501).end()
