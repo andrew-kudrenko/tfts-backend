@@ -18,6 +18,14 @@ router.route('/tasks')
       next()
     })
   })
+  .options((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
+    res.end()
+    next()
+  })
   .post((req, res, next) => {
     const { title, solution, condition, category } = req.body
 

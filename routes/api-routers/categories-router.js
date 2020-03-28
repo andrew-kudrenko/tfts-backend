@@ -19,6 +19,14 @@ router.route('/categories')
       next()
     })
   })
+  .options((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
+    res.end()
+    next()
+  })
   .post((req, res) => {
     const { title, alias, description, preview, img } = req.body
 
