@@ -28,7 +28,7 @@ router.route('/tasks')
     })
 
     task.save(err => {
-      if (err) res.status(501).end()
+      if (err) res.status(501)
 
       res.end()
       next()
@@ -44,10 +44,18 @@ router.route('/tasks/update')
     connect('/tasks')
     next()
   })
+  .options((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
+    res.end()
+    next()
+  })
   .post((req, res, next) => {
     const body = req.body
     Task.findByIdAndUpdate(body._id, { ...body }, (err) => {
-      if (err) res.status(501).end()
+      if (err) res.status(501)
 
       res.end()
       next()
@@ -63,9 +71,17 @@ router.route('/tasks/remove')
     connect('/tasks')
     next()
   })
+  .options((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
+    res.end()
+    next()
+  })
   .post((req, res, next) => {
     Task.findByIdAndDelete(req.body._id, (err) => {
-      if (err) res.status(501).end()
+      if (err) res.status(501)
 
       res.end()
       next()

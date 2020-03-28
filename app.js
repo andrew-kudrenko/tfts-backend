@@ -15,7 +15,7 @@ app.use((_, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', true)
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
   next()
-  res.end()
+  // res.end()
 })
 
 app.use('/api', apiRouter)

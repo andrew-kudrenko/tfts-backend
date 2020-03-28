@@ -45,9 +45,17 @@ router.route('/categories/remove')
     connect('/categories')
     next()
   })
+  .options((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
+    res.end()
+    next()
+  })
   .post((req, res, next) => {
     Category.findByIdAndDelete(req.body._id, (err) => {
-      if (err) res.status(501).end()
+      if (err) res.status(501)
 
       res.end()
       next()
@@ -63,9 +71,17 @@ router.route('/categories/update')
     connect('/categories')
     next()
   })
+  .options((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')  
+    res.end()
+    next()
+  })
   .post((req, res, next) => {
     Category.findByIdAndUpdate(req.body._id, { ...req.body }, (err) => {
-      if (err) res.status(501).end()
+      if (err) res.status(501)
 
       res.end()
       next()
